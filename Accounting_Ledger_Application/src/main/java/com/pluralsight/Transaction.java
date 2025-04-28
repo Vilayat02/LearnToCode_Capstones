@@ -179,5 +179,41 @@ public class Transaction {
         return transaction;
     }
 
+    public static ArrayList<Transaction> addPayment(){  //Add new Deposit in file
+        ArrayList<Transaction> transaction = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("src/main/resources/transactions.csv", true));
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String formattedTime = time.format(timeFormatter);
+            System.out.print("Enter description: ");
+            String descr = sc.nextLine();
+            System.out.print("Enter vendor: ");
+            String ven = sc.nextLine();
+            System.out.print("Enter amount: ");
+            double am = sc.nextDouble();
+            if (am < 0) {
+                String line = date + "|" + formattedTime + "|" + descr + "|" + ven + "|" + am;
+                Transaction transaction1 = new Transaction(date, time, descr, ven, am);
+                transaction.add(transaction1);
+                bufWriter.write(line);
+                bufWriter.newLine();
+                System.out.println("Added succesfully!");
+            }
+            else {
+                System.out.println("The entered amount for a payment cannot be positive, it must be a negative value.!");
+
+            }
+            bufWriter.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace(); // Выводим ошибку в случае неудачи
+        }
+
+        return transaction;
+    }
+
 
 }

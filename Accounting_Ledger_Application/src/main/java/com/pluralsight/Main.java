@@ -6,8 +6,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Transaction> tra = Transaction.getAllTransactions();
-        ArrayList<Transaction> transactions = new ArrayList<>();
         boolean run = true;
         while (run){
             System.out.println("\n1.Add deposit\n2.Make Payment (Debit)\n3.Ledger\n4.Exit");
@@ -17,7 +15,7 @@ public class Main {
                 Transaction.addDeposit();
             }
             else if (firstChoose == 2) {
-
+                Transaction.addPayment();
             }
             else if (firstChoose == 3){
                 boolean run2 = true;
@@ -26,6 +24,7 @@ public class Main {
                     int secondChoose = sc.nextInt();
                     sc.nextLine();
                     if (secondChoose == 1) {
+                        ArrayList<Transaction> tra = Transaction.getAllTransactions();
                         for (Transaction field : tra) {
                             System.out.println(field.getDate() + " | " + field.getTime() + " | " + field.getDescription() + " | " + field.getVendor() + " | " + field.getAmount());
                         }
@@ -61,6 +60,7 @@ public class Main {
             }
             else if (firstChoose == 4){
                 run = false;
+                System.out.println("Closing...");
             }
         }
 
