@@ -42,7 +42,7 @@ public class Main {
                     } else if (secondChoose == 3) {
                         ArrayList<Transaction> payments = Transaction.getPayments();
                         if (payments.isEmpty()){
-                            System.out.println("Deposits not found");
+                            System.out.println("Payments not found");
                         }
                         else {
                             for (Transaction field : payments) {
