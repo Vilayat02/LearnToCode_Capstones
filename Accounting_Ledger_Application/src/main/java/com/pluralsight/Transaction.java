@@ -116,6 +116,33 @@ public class Transaction {
         return transaction;
     }
 
+    public static ArrayList<Transaction> getPayments(){
+        ArrayList<Transaction> transaction = new ArrayList<>();
+        try {
+            BufferedReader bufReader = new BufferedReader(new FileReader("src/main/resources/transactions.csv"));
+            bufReader.readLine();
+            String line;
+            while ((line = bufReader.readLine()) != null){
+                String[] parts = line.split("\\|");
+                LocalDate date = LocalDate.parse(parts[0]);
+                LocalTime time = LocalTime.parse(parts[1]);
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+                if (amount < 0) {
+                    Transaction tra = new Transaction(date, time, description, vendor, amount);
+                    transaction.add(tra);
+                }
+            }
+            bufReader.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return transaction;
+    }
+
     public static ArrayList<Transaction> addDeposit(){  //Add new Deposit in file
         ArrayList<Transaction> transaction = new ArrayList<>();
         Scanner sc = new Scanner(System.in);

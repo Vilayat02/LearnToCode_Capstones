@@ -40,7 +40,15 @@ public class Main {
                             }
                         }
                     } else if (secondChoose == 3) {
-
+                        ArrayList<Transaction> payments = Transaction.getPayments();
+                        if (payments.isEmpty()){
+                            System.out.println("Deposits not found");
+                        }
+                        else {
+                            for (Transaction field : payments) {
+                                System.out.println(field.getDate() + " | " + field.getTime() + " | " + field.getDescription() + " | " + field.getVendor() + " | " + field.getAmount());
+                            }
+                        }
                     } else if (secondChoose == 4) {
 
                     } else if (secondChoose == 5) {
