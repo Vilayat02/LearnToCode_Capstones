@@ -215,5 +215,26 @@ public class Transaction {
         return transaction;
     }
 
+    public static ArrayList<Transaction > getMonthToDate(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter start date (YYYY-MM-DD): ");
+        String inputDate = sc.nextLine();
+        LocalDate startDate;
+        try{
+            startDate = LocalDate.parse(inputDate);
+            LocalDate today = LocalDate.now();
+            ArrayList<Transaction> transactions = Transaction.getAllTransactions();
+            ArrayList<Transaction> filteredTransactions = new ArrayList<>();
+            for (Transaction transaction : transactions) {
+                if (!transaction.getDate().isBefore(startDate) && !transaction.getDate().isAfter(today)) {
+                    filteredTransactions.add(transaction);
+                }
+            }
+            return filteredTransactions;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

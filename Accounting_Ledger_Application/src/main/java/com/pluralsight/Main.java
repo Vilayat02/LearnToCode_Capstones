@@ -49,7 +49,38 @@ public class Main {
                             }
                         }
                     } else if (secondChoose == 4) {
+                        boolean run3 = true;
+                        while(run3) {
+                            System.out.println("Search by:\n1.Month to Date\n2.Previous Month\n3.Year to Date\n4.Previous Year\n5.Search by Vendor\n0.Back");
+                            int thirdChoose = sc.nextInt();
+                            sc.nextLine();
+                            if (thirdChoose == 1) {
+                                ArrayList<Transaction> filtered = Transaction.getMonthToDate();
+                                if (filtered.isEmpty()) {
+                                    System.out.println("No transactions found in this range.");
+                                } else {
+                                    for (Transaction field : filtered) {
+                                        System.out.println(field.getDate() + " | " +
+                                                field.getTime() + " | " +
+                                                field.getDescription() + " | " +
+                                                field.getVendor() + " | " +
+                                                field.getAmount());
+                                    }
+                                }
+                            } else if (thirdChoose == 2) {
 
+                            } else if (thirdChoose == 3) {
+
+                            } else if (thirdChoose == 4) {
+
+                            } else if (thirdChoose == 5) {
+
+                            } else if (thirdChoose == 0) {
+                                run3 = false;
+                            } else {
+                                System.out.println("Wrong option!");
+                            }
+                        }
                     } else if (secondChoose == 5) {
                         run2 = false;
                     } else {
