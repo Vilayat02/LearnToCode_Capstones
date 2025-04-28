@@ -89,6 +89,33 @@ public class Transaction {
         return tra;
     }
 
+    public static ArrayList<Transaction> getDeposits(){
+        ArrayList<Transaction> transaction = new ArrayList<>();
+        try {
+            BufferedReader bufReader = new BufferedReader(new FileReader("src/main/resources/transactions.csv"));
+            bufReader.readLine();
+            String line;
+            while ((line = bufReader.readLine()) != null){
+                String[] parts = line.split("\\|");
+                LocalDate date = LocalDate.parse(parts[0]);
+                LocalTime time = LocalTime.parse(parts[1]);
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+                if (amount > 0) {
+                    Transaction tra = new Transaction(date, time, description, vendor, amount);
+                    transaction.add(tra);
+                }
+            }
+            bufReader.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return transaction;
+    }
+
     public static ArrayList<Transaction> addDeposit(){  //Add new Deposit in file
         ArrayList<Transaction> transaction = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -104,11 +131,18 @@ public class Transaction {
             String ven = sc.nextLine();
             System.out.print("Enter amount: ");
             double am = sc.nextDouble();
-            String line = date + "|" + formattedTime + "|" + descr + "|" + ven + "|" + am;
-            Transaction transaction1 = new Transaction(date,time,descr,ven,am);
-            transaction.add(transaction1);
+            if (am > 0) {
+                String line = date + "|" + formattedTime + "|" + descr + "|" + ven + "|" + am;
+                Transaction transaction1 = new Transaction(date, time, descr, ven, am);
+                transaction.add(transaction1);
                 bufWriter.write(line);
                 bufWriter.newLine();
+                System.out.println("Added succesfully!");
+            }
+            else {
+                System.out.println("The deposit cannot be a negative value!");
+
+            }
             bufWriter.close();
         }
         catch (IOException e) {

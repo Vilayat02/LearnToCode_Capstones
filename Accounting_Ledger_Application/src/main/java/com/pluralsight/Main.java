@@ -15,7 +15,6 @@ public class Main {
             sc.nextLine();
             if (firstChoose == 1){
                 Transaction.addDeposit();
-                System.out.println("Added succesfully!");
             }
             else if (firstChoose == 2) {
 
@@ -31,7 +30,15 @@ public class Main {
                             System.out.println(field.getDate() + " | " + field.getTime() + " | " + field.getDescription() + " | " + field.getVendor() + " | " + field.getAmount());
                         }
                     } else if (secondChoose == 2) {
-
+                        ArrayList<Transaction> deposits = Transaction.getDeposits();
+                        if (deposits.isEmpty()){
+                            System.out.println("Deposits not found");
+                        }
+                        else {
+                            for (Transaction field : deposits) {
+                                System.out.println(field.getDate() + " | " + field.getTime() + " | " + field.getDescription() + " | " + field.getVendor() + " | " + field.getAmount());
+                            }
+                        }
                     } else if (secondChoose == 3) {
 
                     } else if (secondChoose == 4) {
