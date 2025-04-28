@@ -7,12 +7,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Transaction> tra = Transaction.getAllTransactions();
+        ArrayList<Transaction> transactions = new ArrayList<>();
         boolean run = true;
         while (run){
             System.out.println("\n1.Add deposit\n2.Make Payment (Debit)\n3.Ledger\n4.Exit");
             int firstChoose = sc.nextInt();
+            sc.nextLine();
             if (firstChoose == 1){
-
+                Transaction.addDeposit();
+                System.out.println("Added succesfully!");
             }
             else if (firstChoose == 2) {
 

@@ -1,13 +1,12 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.annotation.Target;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Transaction {
     private LocalDate date;
@@ -64,7 +63,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public static ArrayList<Transaction> getAllTransactions(){
+    public static ArrayList<Transaction> getAllTransactions(){  //Shows all entries
         ArrayList<Transaction> tra = new ArrayList<>();
         try {
             BufferedReader bufReader = new BufferedReader(new FileReader("src/main/resources/transactions.csv"));
@@ -88,6 +87,35 @@ public class Transaction {
         }
 
         return tra;
+    }
+
+    public static ArrayList<Transaction> addDeposit(){  //Add new Deposit in file
+        ArrayList<Transaction> transaction = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        try {
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("src/main/resources/transactions.csv", true));
+            LocalDate date = LocalDate.now();
+            LocalTime time = LocalTime.now();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String formattedTime = time.format(timeFormatter);
+            System.out.print("Enter description: ");
+            String descr = sc.nextLine();
+            System.out.print("Enter vendor: ");
+            String ven = sc.nextLine();
+            System.out.print("Enter amount: ");
+            double am = sc.nextDouble();
+            String line = date + "|" + formattedTime + "|" + descr + "|" + ven + "|" + am;
+            Transaction transaction1 = new Transaction(date,time,descr,ven,am);
+            transaction.add(transaction1);
+                bufWriter.write(line);
+                bufWriter.newLine();
+            bufWriter.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace(); // Выводим ошибку в случае неудачи
+        }
+
+        return transaction;
     }
 
 
