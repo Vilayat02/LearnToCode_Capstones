@@ -285,6 +285,17 @@ public class Transaction {
                 result.add(t);
             }
         }
+        return result;
+    }
+
+    public static ArrayList<Transaction> searchByVendor(String vendorName) {
+        ArrayList<Transaction> all = getAllTransactions();
+        ArrayList<Transaction> result = new ArrayList<>();
+        for (Transaction t : all) {
+            if (t.getVendor().equalsIgnoreCase(vendorName.trim())) {
+                result.add(t);
+            }
+        }
 
         return result;
     }

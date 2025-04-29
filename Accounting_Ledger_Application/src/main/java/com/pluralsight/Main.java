@@ -96,7 +96,17 @@ public class Main {
                                     }
                                 }
                             } else if (thirdChoose == 5) {
+                                System.out.print("Enter vendor name to search: ");
+                                String vendorName = sc.nextLine();
 
+                                ArrayList<Transaction> results = Transaction.searchByVendor(vendorName);
+                                if (results.isEmpty()) {
+                                    System.out.println("No transactions found for vendor: " + vendorName);
+                                } else {
+                                    for (Transaction t : results) {
+                                        System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
+                                    }
+                                }
                             } else if (thirdChoose == 0) {
                                 run3 = false;
                             } else {
