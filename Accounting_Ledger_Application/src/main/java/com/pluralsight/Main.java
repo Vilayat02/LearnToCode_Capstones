@@ -77,7 +77,14 @@ public class Main {
                                     }
                                 }
                             } else if (thirdChoose == 3) {
-
+                                ArrayList<Transaction> filtered = Transaction.getYearToDate();
+                                if (filtered.isEmpty()) {
+                                    System.out.println("No transactions found for this year.");
+                                } else {
+                                    for (Transaction t : filtered) {
+                                        System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
+                                    }
+                                }
                             } else if (thirdChoose == 4) {
 
                             } else if (thirdChoose == 5) {

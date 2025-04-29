@@ -173,7 +173,7 @@ public class Transaction {
             bufWriter.close();
         }
         catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
 
         return transaction;
@@ -252,7 +252,26 @@ public class Transaction {
         return result;
     }
 
+    public static ArrayList<Transaction> getYearToDate() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter year (e.g., 2024): ");
+        int inputYear = scanner.nextInt();
+        scanner.nextLine();
 
+        LocalDate firstDay = LocalDate.of(inputYear, 1, 1);
+        LocalDate today = LocalDate.now();
+
+        ArrayList<Transaction> result = new ArrayList<>();
+        ArrayList<Transaction> all = getAllTransactions();
+
+        for (Transaction t : all) {
+            if (!t.getDate().isBefore(firstDay) && !t.getDate().isAfter(today)) {
+                result.add(t);
+            }
+        }
+
+        return result;
+    }
 
 
 }
