@@ -258,7 +258,7 @@ public class Transaction {
         int inputYear = scanner.nextInt();
         scanner.nextLine();
 
-        LocalDate firstDay = LocalDate.of(inputYear, 1, 1);
+        LocalDate firstDay = LocalDate.of(inputYear, 1, 1); //Starting search from 1 month 1 day
         LocalDate today = LocalDate.now();
 
         ArrayList<Transaction> result = new ArrayList<>();
@@ -273,5 +273,19 @@ public class Transaction {
         return result;
     }
 
+    public static ArrayList<Transaction> getPreviousYear() {
+        LocalDate today = LocalDate.now();
+        int previousYear = today.getYear() - 1;
 
+        ArrayList<Transaction> all = Transaction.getAllTransactions();
+        ArrayList<Transaction> result = new ArrayList<>();
+
+        for (Transaction t : all) {
+            if (t.getDate().getYear() == previousYear) {
+                result.add(t);
+            }
+        }
+
+        return result;
+    }
 }

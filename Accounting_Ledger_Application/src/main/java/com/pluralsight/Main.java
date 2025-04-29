@@ -86,7 +86,15 @@ public class Main {
                                     }
                                 }
                             } else if (thirdChoose == 4) {
-
+                                ArrayList<Transaction> previousYear = Transaction.getPreviousYear();
+                                if(previousYear.isEmpty()){
+                                    System.out.println("No transactions found for the previous year.");
+                                }
+                                else{
+                                    for(Transaction t : previousYear){
+                                        System.out.println(t.getDate() + " | " + t.getTime() + " | " + t.getDescription() + " | " + t.getVendor() + " | " + t.getAmount());
+                                    }
+                                }
                             } else if (thirdChoose == 5) {
 
                             } else if (thirdChoose == 0) {
