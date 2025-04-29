@@ -236,5 +236,23 @@ public class Transaction {
         }
     }
 
+    public static ArrayList<Transaction> getPreviousMonth() {
+        LocalDate today = LocalDate.now();
+        LocalDate firstDayOfPreviousMonth = today.minusMonths(1).withDayOfMonth(1);
+        LocalDate lastDayOfPreviousMonth = firstDayOfPreviousMonth.withDayOfMonth(firstDayOfPreviousMonth.lengthOfMonth());
+
+        ArrayList<Transaction> all = Transaction.getAllTransactions();
+        ArrayList<Transaction> result = new ArrayList<>();
+
+        for (Transaction t : all) {
+            if (!t.getDate().isBefore(firstDayOfPreviousMonth) && !t.getDate().isAfter(lastDayOfPreviousMonth)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
+    
+
 
 }

@@ -68,7 +68,14 @@ public class Main {
                                     }
                                 }
                             } else if (thirdChoose == 2) {
-
+                                ArrayList<Transaction> filtered = Transaction.getPreviousMonth();
+                                if (filtered.isEmpty()) {
+                                    System.out.println("No transactions found in previous month.");
+                                } else {
+                                    for (Transaction field : filtered) {
+                                        System.out.println(field.getDate() + " | " + field.getTime() + " | " + field.getDescription() + " | " + field.getVendor() + " | " + field.getAmount());
+                                    }
+                                }
                             } else if (thirdChoose == 3) {
 
                             } else if (thirdChoose == 4) {
