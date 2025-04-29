@@ -173,7 +173,7 @@ public class Transaction {
             bufWriter.close();
         }
         catch (IOException e) {
-            e.printStackTrace(); // Выводим ошибку в случае неудачи
+            e.printStackTrace(); 
         }
 
         return transaction;
@@ -209,7 +209,7 @@ public class Transaction {
             bufWriter.close();
         }
         catch (IOException e) {
-            e.printStackTrace(); // Выводим ошибку в случае неудачи
+            e.printStackTrace();
         }
 
         return transaction;
@@ -252,7 +252,7 @@ public class Transaction {
         return result;
     }
 
-    
+
 
 
 }
