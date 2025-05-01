@@ -12,10 +12,22 @@ public class Main {
             int firstChoose = sc.nextInt();
             sc.nextLine();
             if (firstChoose == 1){
-                Transaction.addDeposit();
+                System.out.print("Enter description: ");
+                String descr = sc.nextLine();
+                System.out.print("Enter vendor: ");
+                String ven = sc.nextLine();
+                System.out.print("Enter amount: ");
+                double am = sc.nextDouble();
+                Transaction.addDeposit(descr,ven,am);
             }
             else if (firstChoose == 2) {
-                Transaction.addPayment();
+                System.out.print("Enter description: ");
+                String descr = sc.nextLine();
+                System.out.print("Enter vendor: ");
+                String ven = sc.nextLine();
+                System.out.print("Enter amount: ");
+                double am = sc.nextDouble();
+                Transaction.addPayment(descr,ven,am);
             }
             else if (firstChoose == 3){
                 boolean run2 = true;
@@ -30,7 +42,7 @@ public class Main {
                         }
                     } else if (secondChoose == 2) {
                         ArrayList<Transaction> deposits = Transaction.getDeposits();
-                        if (deposits.isEmpty()){
+                        if (deposits.isEmpty()){   //Check if line is null or not
                             System.out.println("Deposits not found");
                         }
                         else {
@@ -60,11 +72,7 @@ public class Main {
                                     System.out.println("No transactions found in this range.");
                                 } else {
                                     for (Transaction field : filtered) {
-                                        System.out.println(field.getDate() + " | " +
-                                                field.getTime() + " | " +
-                                                field.getDescription() + " | " +
-                                                field.getVendor() + " | " +
-                                                field.getAmount());
+                                        System.out.println(field.getDate() + " | " + field.getTime() + " | " + field.getDescription() + " | " + field.getVendor() + " | " + field.getAmount());
                                     }
                                 }
                             } else if (thirdChoose == 2) {
@@ -98,7 +106,6 @@ public class Main {
                             } else if (thirdChoose == 5) {
                                 System.out.print("Enter vendor name to search: ");
                                 String vendorName = sc.nextLine();
-
                                 ArrayList<Transaction> results = Transaction.searchByVendor(vendorName);
                                 if (results.isEmpty()) {
                                     System.out.println("No transactions found for vendor: " + vendorName);
